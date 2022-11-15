@@ -81,10 +81,32 @@ router.get('/getuser', function (req, res) {
     res.send(result);
   })
 });
-router.post('/postuser',function (req,res) {
-  const userList = mongoose.model('users', userSchema);
-  userList.find({}, function (error, result) {
-    res.send(result);
-  })
+const User = mongoose.model('users',truyenSchema);
+router.post('/useruploads', function (req,res) {
+  var username = req.body.username;
+  var password = req.body.password;
+  var email = req.body.email;
+  var fullname = req.body.fullname;
+  console.log(username);
+  console.log(password);
+  console.log(email);
+  console.log(fullname);
+
+  const data = new User({
+    username: username,
+    password: password,
+    email: email,
+    fullname:fullname
   });
+
+  data.save(function (err) {
+    if (err) return handleError(err);
+    res.render('/getuser', {
+      title: 'Thêm',
+      message: 'Đã thêm'
+    });
+    res.redirect('/getuser')
+    console.log('Da them')
+  });
+});
 module.exports = router;
