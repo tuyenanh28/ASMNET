@@ -47,7 +47,7 @@ router.post('/uploads', function (req,res) {
     name: name,
     chart: chart,
     avatar: avatar,
-    Category:Category
+    Category: Category
   });
 
   data.save(function (err) {
@@ -81,7 +81,7 @@ router.get('/getuser', function (req, res) {
     res.send(result);
   })
 });
-const User = mongoose.model('users',truyenSchema);
+const User = mongoose.model('users',userSchema);
 router.post('/useruploads', function (req,res) {
   var username = req.body.username;
   var password = req.body.password;
@@ -96,12 +96,12 @@ router.post('/useruploads', function (req,res) {
     username: username,
     password: password,
     email: email,
-    fullname:fullname
+    fullname: fullname
   });
 
   data.save(function (err) {
     if (err) return handleError(err);
-    res.render('/getuser', {
+    res.render('index', {
       title: 'Thêm',
       message: 'Đã thêm'
     });
